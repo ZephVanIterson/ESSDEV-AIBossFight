@@ -9,12 +9,18 @@ public class PlatformCollision : MonoBehaviour
     private GameObject player;
     private GameObject enemy;
     private BoxCollider2D platformCollider;
+
+    private BoxCollider2D playerCollider;
+    private BoxCollider2D enemyCollider;
+
     // Start is called before the first frame update
     void Start()
     {
         player=GameObject.FindGameObjectWithTag("Player");
         enemy=GameObject.FindGameObjectWithTag("Enemy");
         platformCollider = transform.GetComponent<BoxCollider2D>();
+        enemyCollider= enemy.transform.GetComponent<BoxCollider2D>();
+        playerCollider= player.transform.GetComponent<BoxCollider2D>();
     }
 
     // Update is called once per frame
@@ -22,24 +28,26 @@ public class PlatformCollision : MonoBehaviour
     {
         //if players bottom is above platforms top then have collision, if not than do not!
 
-        if (player.transform.GetComponent<BoxCollider2D>().size.y / 2 + player.transform.position.y <= platformCollider.size.y / 2 + transform.position.y)
+        if (playerCollider.size.y + player.transform.position.y <= platformCollider.size.y+ transform.position.y)
         {
-            Physics2D.IgnoreCollision(transform.GetComponent<BoxCollider2D>(), player.transform.GetComponent<BoxCollider2D>(), true);
+            Physics2D.IgnoreCollision(platformCollider, playerCollider, true);
+            print("Ignore 1");
         }
         else
         {
-            Physics2D.IgnoreCollision(transform.GetComponent<BoxCollider2D>(), player.transform.GetComponent<BoxCollider2D>(), false);
+            Physics2D.IgnoreCollision(platformCollider, playerCollider, false);
         }
 
         // Same thing for enemies
         // for (int x=0; x< enemy.Length; x++){    
-        if (enemy.transform.GetComponent<BoxCollider2D>().size.y / 2 + enemy.transform.position.y <= platformCollider.size.y / 2 + transform.position.y)
+        if (enemyCollider.size.y + enemy.transform.position.y <= platformCollider.size.y + transform.position.y)
         {
-            Physics2D.IgnoreCollision(transform.GetComponent<BoxCollider2D>(), enemy.transform.GetComponent<BoxCollider2D>(), true);
+            Physics2D.IgnoreCollision(platformCollider, enemyCollider, true);
+            print("Ignore 2");
         }
         else
         {
-            Physics2D.IgnoreCollision(transform.GetComponent<BoxCollider2D>(), enemy.transform.GetComponent<BoxCollider2D>(), false);
+            Physics2D.IgnoreCollision(platformCollider, enemyCollider, false);
         }
 
         // }
