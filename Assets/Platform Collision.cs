@@ -31,19 +31,19 @@ public class PlatformCollision : MonoBehaviour
         if (playerCollider.size.y + player.transform.position.y <= platformCollider.size.y+ transform.position.y)
         {
             Physics2D.IgnoreCollision(platformCollider, playerCollider, true);
-            print("Ignore 1");
+            //print("Ignore 1");
         }
         else
         {
             Physics2D.IgnoreCollision(platformCollider, playerCollider, false);
         }
 
-        // Same thing for enemies
+        // Same thing for enemies, nor functional
         // for (int x=0; x< enemy.Length; x++){    
         if (enemyCollider.size.y + enemy.transform.position.y <= platformCollider.size.y + transform.position.y)
         {
             Physics2D.IgnoreCollision(platformCollider, enemyCollider, true);
-            print("Ignore 2");
+            //print("Ignore 2"); //running but collision not being ignored?
         }
         else
         {
