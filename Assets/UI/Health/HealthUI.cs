@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class HealthBar : MonoBehaviour
 {    
-    public float health;
-    private float initialHealth;
-    public KeyCode damageKey;
+    // public float health;
+    // private float initialHealth;
+    // public KeyCode damageKey;
     private float length; //Intial length of the health bar
     private RectTransform size; //Used to access dimensions and positioning information
     public GameObject damageTaken; //Holds prefab for damage bars when health is lost
@@ -16,9 +16,6 @@ public class HealthBar : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //Set initial health before damage occurs
-        initialHealth = health;
-
         size = this.GetComponent<RectTransform>();
         length = size.sizeDelta.x;
         damage = new Queue<GameObject>();
@@ -30,24 +27,18 @@ public class HealthBar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Test damage
-        if(Input.GetKeyUp(damageKey)) {
-            health -= Random.Range(1, 20);
-            health = health < 0 ? 0 : health;
-            updateHealth();
-        }
         //After an amount of time remove recent damage taken
         if(damage.Count != 0 && Time.time - damageTime > 1) {
             while(damage.Count != 0) {
                 Destroy(damage.Dequeue());
             }
         }
-
     }
 
-    private void updateHealth() {
-        float percentage = health/initialHealth;
-
+    public void updateHealth(float percentage) {
+        if(percentage < 0)
+            percentage = 0;
+        
         //Change in the size of the bar (used for length of damage bar)
         float healthChange = size.sizeDelta.x - (length * percentage);
 
