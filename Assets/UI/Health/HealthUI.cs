@@ -28,7 +28,7 @@ public class HealthBar : MonoBehaviour
     void Update()
     {
         //After an amount of time remove recent damage taken
-        if(damage.Count != 0 && Time.time - damageTime > 1) {
+        if(damage.Count != 0 && Time.time - damageTime > 0.5) {
             while(damage.Count != 0) {
                 Destroy(damage.Dequeue());
             }

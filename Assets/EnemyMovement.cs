@@ -14,9 +14,9 @@ public class EnemyMovement : MonoBehaviour
     public Transform target;
     public Transform attackTransform;
     public LayerMask attackableLayer;
-    public int timeBetweenAttacks = 1;
+    public float timeBetweenAttacks = 1;
 
-
+    public float attackDamage = 10;
     private float attackTimeCounter = 0;
     private float yMovement = 0;
     private int xDirection = 0;
@@ -56,10 +56,11 @@ public class EnemyMovement : MonoBehaviour
         else if (Vector3.Distance(transform.position, target.position) > minDistance)
         {
             ////Try to attack
-            //if (attackTimeCounter >= timeBetweenAttacks) 
-            //{
-            //    attack();
-            //}
+            if (Time.time - attackTimeCounter >= timeBetweenAttacks) 
+            {
+               Debug.Log("Attack");
+               attack();
+            }
 
         }
         //If enemy is too close (inside minimum distance)
@@ -89,13 +90,18 @@ public class EnemyMovement : MonoBehaviour
 
     private void attack() 
     {
-        hits = Physics2D.CircleCastAll(attackTransform.position, attackRange, transform.right, 0f, attackableLayer);
+        hits = Physics2D.CircleCastAll(attackTransform.position, attackRange + 50, transform.right, 0f, attackableLayer);
 
-        //for (int i = 0; i < hits.Length; i++) 
-        //{
+        Debug.Log(hits.Length);
+        for (int i = 0; i < hits.Length; i++) 
+        {
+            hits[i].collider.gameObject.GetComponent<EntityHealth>().Damage(attackDamage);
+        }
 
-        //}
+        attackTimeCounter = Time.time;
+    }
 
-        attackTimeCounter = 0;
+    private void OnDrawGizmosSelected() {
+        Gizmos.DrawWireSphere(attackTransform.position, attackRange + 50);
     }
 }
