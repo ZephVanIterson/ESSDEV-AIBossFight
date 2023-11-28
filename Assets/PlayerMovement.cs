@@ -20,7 +20,9 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-    
+
+
+    //Need to make jump height not dependant on fps
         if(yMovement>0){
             yMovement-=riseDecceleration;
         }

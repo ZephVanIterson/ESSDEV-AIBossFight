@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EntityHealth : MonoBehaviour
 {
@@ -15,8 +16,32 @@ public class EntityHealth : MonoBehaviour
     
     public void Damage(float amount) {
         health -= amount;
-        // Debug.Log("Health: " + health + "Damage: " + amount);
+        Debug.Log(gameObject.name+" Health: " + health + " (Took "+amount+" damage)");
         bar.updateHealth(health/maxHealth);
+
+        if (health <= 0) {
+            Debug.Log(gameObject.name + " died");
+            Die();
+        }
+    }
+
+    public void Die()
+    {
+        if (gameObject.tag == "Player") 
+        {
+            //Lose
+            Debug.Log("Lose");
+            SceneManager.LoadScene("Loss Screen");
+
+        }
+        else if (gameObject.tag == "Enemy")
+        {
+            //Win
+            Debug.Log("Win");
+            SceneManager.LoadScene("Win Screen");
+        }
+        // Debug.Log("Died");
+
     }
 }
 
