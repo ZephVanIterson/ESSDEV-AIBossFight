@@ -28,10 +28,9 @@ public class PlatformCollision : MonoBehaviour
     {
         //if players bottom is above platforms top then have collision, if not than do not!
 
-        if (playerCollider.size.y + player.transform.position.y <= platformCollider.size.y+ transform.position.y)
+        if (-playerCollider.size.y + player.transform.position.y <= platformCollider.size.y + transform.position.y)
         {
             Physics2D.IgnoreCollision(platformCollider, playerCollider, true);
-            //print("Ignore 1");
         }
         else
         {
@@ -40,14 +39,15 @@ public class PlatformCollision : MonoBehaviour
 
         // Same thing for enemies, nor functional
         // for (int x=0; x< enemy.Length; x++){    
-        if (enemyCollider.size.y + enemy.transform.position.y <= platformCollider.size.y + transform.position.y)
+        if (enemy.transform.position.y - enemyCollider.size.y <= transform.position.y+ platformCollider.size.y)
         {
             Physics2D.IgnoreCollision(platformCollider, enemyCollider, true);
-            //print("Ignore 2"); //running but collision not being ignored?
+            print("Ignore True"); //running but collision not being ignored?
         }
         else
         {
             Physics2D.IgnoreCollision(platformCollider, enemyCollider, false);
+            print("Ignore Flase");
         }
 
         // }
