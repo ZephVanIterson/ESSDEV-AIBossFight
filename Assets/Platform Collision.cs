@@ -7,20 +7,23 @@ using UnityEngine.Tilemaps;
 public class PlatformCollision : MonoBehaviour
 {
     private GameObject player;
-    private GameObject enemy;
+    private GameObject[] enemy;
     private BoxCollider2D platformCollider;
 
     private BoxCollider2D playerCollider;
-    private BoxCollider2D enemyCollider;
+    private BoxCollider2D[] enemyCollider;
 
     // Start is called before the first frame update
     void Start()
     {
-        player=GameObject.FindGameObjectWithTag("Player");
-        enemy=GameObject.FindGameObjectWithTag("Enemy");
+        player = GameObject.FindGameObjectWithTag("Player");
         platformCollider = transform.GetComponent<BoxCollider2D>();
-        enemyCollider= enemy.transform.GetComponent<BoxCollider2D>();
-        playerCollider= player.transform.GetComponent<BoxCollider2D>();
+        playerCollider = player.transform.GetComponent<BoxCollider2D>();
+    }
+
+    void Awake()
+    {
+       RefreshEnemyArray();
     }
 
     // Update is called once per frame
@@ -37,19 +40,28 @@ public class PlatformCollision : MonoBehaviour
             Physics2D.IgnoreCollision(platformCollider, playerCollider, false);
         }
 
-        // Same thing for enemies, nor functional
-        // for (int x=0; x< enemy.Length; x++){    
-        if (enemy.transform.position.y - enemyCollider.size.y <= transform.position.y+ platformCollider.size.y)
-        {
-            Physics2D.IgnoreCollision(platformCollider, enemyCollider, true);
-            print("Ignore True"); //running but collision not being ignored?
-        }
-        else
-        {
-            Physics2D.IgnoreCollision(platformCollider, enemyCollider, false);
-            print("Ignore Flase");
-        }
 
-        // }
+        for (int x = 0; x < enemy.Length; x++)
+        {
+            if (enemy[x].transform.position.y - enemyCollider[x].size.y <= transform.position.y + platformCollider.size.y)
+            {
+                Physics2D.IgnoreCollision(platformCollider, enemyCollider[x], true);
+            }
+            else
+            {
+                Physics2D.IgnoreCollision(platformCollider, enemyCollider[x], false);
+            }
+
+        }
+    }
+
+    private void RefreshEnemyArray()
+    {
+        enemy = GameObject.FindGameObjectsWithTag("Enemy");
+        enemyCollider= new BoxCollider2D[enemy.Length];
+        for (int x = 0; x < enemy.Length; x++)
+        {
+            enemyCollider[x] = enemy[x].transform.GetComponent<BoxCollider2D>();
+        }
     }
 }
