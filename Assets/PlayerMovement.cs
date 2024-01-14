@@ -20,19 +20,28 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-
-    //Need to make jump height not dependant on fps
+    
         if(yMovement>0){
             yMovement-=riseDecceleration;
         }
-        movementDirection= new Vector2 (Input.GetAxis("Horizontal"),0);
-        if(Input.GetButtonDown("Jump")&&rb.IsTouchingLayers(LayerMask.GetMask("Ground"))){
-            yMovement=jumpPower;
-        }
+
     }
 
     void FixedUpdate(){
         rb.velocity=new Vector2((movementDirection*speed).x,yMovement);
+    }
+
+    public void MoveLeft(){
+    movementDirection= new Vector2 (-1,0);
+    }
+
+    public void MoveRight(){
+    movementDirection= new Vector2 (1,0);
+    }
+
+    public void Jump(){
+        if(rb.IsTouchingLayers(LayerMask.GetMask("Ground"))){
+            yMovement=jumpPower;
+        }
     }
 }
