@@ -7,6 +7,7 @@ public class PlayerDummyAI : MonoBehaviour
     private PlayerMovement playerMovement;
     public int Smartness = 0;
     bool randomMovement = false;
+    bool attack = false;
     //Will be used to determine length of an action in s 
     float decisionTime;
     int rnd;
@@ -14,16 +15,20 @@ public class PlayerDummyAI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
-        playerMovement=transform.GetComponent<PlayerMovement>();
-        //PickAction();
+
+        playerMovement = transform.GetComponent<PlayerMovement>();
+        rnd = Random.Range(0, 100);
         switch (Smartness)
         {
             case 0:
                 randomMovement = true;
-                decisionTime =2;
+                decisionTime = 2;
                 break;
-
+            case 1:
+                randomMovement = true;
+                attack = true;
+                decisionTime = 2;
+                break;
         }
     }
 
@@ -31,10 +36,14 @@ public class PlayerDummyAI : MonoBehaviour
     void Update()
     {
         time += Time.deltaTime;
-        if (time>=decisionTime)
+        if (time >= decisionTime)
         {
             rnd = Random.Range(0, 100);
-            time=0;
+            if (attack)
+            {
+                AttackChoice();
+            }
+            time = 0;
         }
         if (randomMovement)
         {
@@ -42,15 +51,28 @@ public class PlayerDummyAI : MonoBehaviour
         }
     }
 
-    private void PickAction(){
-        if(rnd<=40){
+    private void PickAction()
+    {
+        if (rnd <= 40)
+        {
             playerMovement.MoveLeft();
         }
-        else if(rnd<=80){
+        else if (rnd <= 80)
+        {
             playerMovement.MoveRight();
         }
-        else if(rnd>80){
+        else if (rnd > 80)
+        {
             playerMovement.Jump();
+        }
+    }
+    private void AttackChoice()
+    {
+        int attackRan = Random.Range(0, 100);
+        if (attackRan <= 50)
+        {
+            //insert player attack method
+            print("I attacked!");
         }
     }
 }
