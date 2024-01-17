@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerDummyAI : MonoBehaviour
@@ -8,16 +9,21 @@ public class PlayerDummyAI : MonoBehaviour
     private PlayerMovement playerMovement;
     public int Smartness = 0;
     bool randomMovement = false;
+    bool smartMovement = false;
     bool attack = false;
     bool smartAttack = false;
+    bool attacking =false;
     //Will be used to determine length of an action in s 
     float decisionTime;
+    bool jumping=false;
     int rnd;
     float time;
+    float attackCooldown;
+    float attackCooldownTime;
     // Start is called before the first frame update
     void Start()
     {
-        enemies=GameObject.FindGameObjectsWithTag("Enemy");
+        enemies = GameObject.FindGameObjectsWithTag("Enemy");
         playerMovement = transform.GetComponent<PlayerMovement>();
         rnd = Random.Range(0, 100);
         switch (Smartness)
@@ -35,6 +41,13 @@ public class PlayerDummyAI : MonoBehaviour
                 randomMovement = true;
                 smartAttack = true;
                 decisionTime = 2;
+                break;
+            case 3:
+                smartMovement = true;
+                smartAttack = true;
+                decisionTime = 2;
+                attackCooldownTime=1;
+                attackCooldown=attackCooldownTime;
                 break;
         }
     }
@@ -62,6 +75,26 @@ public class PlayerDummyAI : MonoBehaviour
         if (randomMovement)
         {
             PickAction();
+        }
+
+        if (smartMovement && !jumping)
+        {
+            SmartMovement();
+        }
+
+        if(transform.GetComponent<Rigidbody2D>().IsTouchingLayers(LayerMask.GetMask("Ground"))){
+            jumping=false;
+        }
+        else{
+            jumping=true;
+        }
+
+        if (attacking){
+            attackCooldown-=Time.deltaTime;
+            if (attackCooldown<=0){
+                attacking=false;
+                attackCooldown=attackCooldownTime;
+            }
         }
 
     }
@@ -93,25 +126,69 @@ public class PlayerDummyAI : MonoBehaviour
 
     private void SmartAttack()
     {
-        GameObject closestEnemy =enemies[0];
-        float closestInX=10000000; 
-        for(int i=0; i<enemies.Length; i++){
-            if (enemies[i].transform.position.x-transform.position.x<closestInX){
-                closestEnemy=enemies[i];
-                closestInX=transform.position.x-enemies[i].transform.position.x;
-            }
-        }
+        GameObject closestEnemy = FindNearestEnemy();
+        float enemyPosition = closestEnemy.transform.position.x;
         // print(enemies[0]);
         // print(enemies[1]);
 
 
-        if(closestEnemy.transform.position.x>transform.position.x && closestEnemy.transform.position.x-transform.position.x<1){
+        if (enemyPosition > transform.position.x && enemyPosition - transform.position.x < 3.5 && !attacking)
+        {
             //attack right
             //print("Attack right");
+            attacking=true;
         }
-        else if(closestEnemy.transform.position.x<transform.position.x && closestEnemy.transform.position.x-transform.position.x<1){
-            //attack right
+        else if (enemyPosition < transform.position.x && enemyPosition - transform.position.x > -3.5 &&!attacking)
+        {
+            //attack left
             //print("Attack left");
+            attacking=true;
         }
+    }
+
+    private void SmartMovement()
+    {
+        GameObject closestEnemy = FindNearestEnemy();
+        float enemyPosition = closestEnemy.transform.position.x;
+        float distanceFromEnemy = enemyPosition - transform.position.x;
+
+        if (distanceFromEnemy > 2.9 || distanceFromEnemy < -2.9)
+        {
+            if (enemyPosition > transform.position.x)
+            {
+                playerMovement.MoveLeft();
+            }
+            else if (enemyPosition < transform.position.x)
+            {
+                playerMovement.MoveRight();
+            }
+        }
+        else if (distanceFromEnemy<2.9 && distanceFromEnemy>0){
+            playerMovement.MoveRight();
+            playerMovement.Jump();
+        }
+        else if (distanceFromEnemy>-2.9 && distanceFromEnemy<0){
+            playerMovement.MoveLeft();
+            playerMovement.Jump();
+        }
+
+
+
+    }
+
+    private GameObject FindNearestEnemy()
+    {
+        GameObject closestEnemy = enemies[0];
+        float closestInX = 10000000;
+        for (int i = 0; i < enemies.Length; i++)
+        {
+            if (enemies[i].transform.position.x - transform.position.x < closestInX)
+            {
+                closestEnemy = enemies[i];
+                closestInX = transform.position.x - enemies[i].transform.position.x;
+            }
+        }
+        //print(closestEnemy);
+        return closestEnemy;
     }
 }
