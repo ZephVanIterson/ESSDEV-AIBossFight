@@ -29,20 +29,23 @@ public class PlayerDummyAI : MonoBehaviour
         switch (Smartness)
         {
             case 0:
-                randomMovement = true;
-                decisionTime = 2;
+                print("Hi I am a training dummy");
                 break;
             case 1:
                 randomMovement = true;
-                attack = true;
                 decisionTime = 2;
                 break;
             case 2:
                 randomMovement = true;
+                attack = true;
+                decisionTime = 2;
+                break;
+            case 4:
+                randomMovement = true;
                 smartAttack = true;
                 decisionTime = 2;
                 break;
-            case 3:
+            case 5:
                 smartMovement = true;
                 smartAttack = true;
                 decisionTime = 2;
