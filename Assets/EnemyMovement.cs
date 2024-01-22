@@ -72,7 +72,7 @@ public class EnemyMovement : MonoBehaviour
 
         if (yMovement > 0)
         {
-            yMovement -= riseDecceleration;
+            yMovement -= riseDecceleration * Time.deltaTime * 500;
         }
 
         if (player.transform.position.y > transform.position.y && rb.IsTouchingLayers(LayerMask.GetMask("Ground")) && !(player.transform.position.x > transform.position.x + 4 || player.transform.position.x < transform.position.x - 4))

@@ -24,31 +24,28 @@ public class PlayerMovement : MonoBehaviour
     {
     
         if(yMovement>0){
-            yMovement-=riseDecceleration;
-        }
-
-        if(movementDirection.x != 0) {
-            if(transform.rotation.y == 0 && movementDirection.x > 0){
-                transform.Rotate(new Vector3(0, 180, 0));
-            }
-            else if (transform.rotation.y == -1 && movementDirection.x < 0) {
-                transform.Rotate(new Vector3(0, -180, 0));
-            }
+            yMovement-=(riseDecceleration * (Time.deltaTime * 500));
         }
         
         
     }
 
     void FixedUpdate(){
-        rb.velocity=new Vector2((movementDirection*speed).x,yMovement);
+        rb.velocity=new Vector2((movementDirection*speed).x*(Time.deltaTime * 50),yMovement);
     
     }
 
     public void MoveLeft(){
+    if (transform.rotation.y == -1 && movementDirection.x < 0) {
+        transform.Rotate(new Vector3(0, -180, 0));
+    }
     movementDirection= new Vector2 (-1,0);
     }
 
     public void MoveRight(){
+    if(transform.rotation.y == 0 && movementDirection.x > 0){
+        transform.Rotate(new Vector3(0, 180, 0));
+    }
     movementDirection= new Vector2 (1,0);
     }
 
