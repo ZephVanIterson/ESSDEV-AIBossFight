@@ -102,6 +102,6 @@ public class EnemyMovement : MonoBehaviour
     }
 
     private void OnDrawGizmosSelected() {
-        Gizmos.DrawWireSphere(attackTransform.position, attackRange + 50);
+        Gizmos.DrawWireSphere(attackTransform.position, attackRange);
     }
 }

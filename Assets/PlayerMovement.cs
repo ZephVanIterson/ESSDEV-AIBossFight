@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -30,9 +32,22 @@ public class PlayerMovement : MonoBehaviour
         if(Input.GetButtonDown("Jump")&&rb.IsTouchingLayers(LayerMask.GetMask("Ground"))){
             yMovement=jumpPower;
         }
+        if(movementDirection.x != 0) {
+            if(transform.rotation.y == 0 && movementDirection.x > 0){
+                transform.Rotate(new Vector3(0, 180, 0));
+            }
+            else if (transform.rotation.y == -1 && movementDirection.x < 0) {
+                transform.Rotate(new Vector3(0, -180, 0));
+            }
+        }
+        
+        
     }
 
     void FixedUpdate(){
         rb.velocity=new Vector2((movementDirection*speed).x,yMovement);
+    
     }
+
+    
 }
