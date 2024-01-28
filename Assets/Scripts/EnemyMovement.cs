@@ -37,11 +37,11 @@ public class EnemyMovement : MonoBehaviour
     /// </summary>
     void Update()
     {
-        // rotate to look at the player (left or right)
-        Vector2 targetPosition = new Vector3(target.position.x, transform.position.y);
-       // Vector3 targetPosition = new Vector3(target.position.x, transform.position.y, transform.position.z);
-        transform.LookAt(targetPosition);
-        transform.Rotate(new Vector3(0, -90, 0), Space.Self);//correcting the original rotation
+    //     // rotate to look at the player (left or right)
+    //     Vector2 targetPosition = new Vector3(target.position.x, transform.position.y);
+    //    // Vector3 targetPosition = new Vector3(target.position.x, transform.position.y, transform.position.z);
+    //     transform.LookAt(targetPosition);
+    //     transform.Rotate(new Vector3(0, -90, 0), Space.Self);//correcting the original rotation
 
         // //movement
 
@@ -112,6 +112,7 @@ public class EnemyMovement : MonoBehaviour
     
     private void Move(double movementDirection)
     {
+        //print(movementDirection);
         transform.Translate(new Vector3((float)(speed*movementDirection) * Time.deltaTime, 0, 0));    
     }
     
