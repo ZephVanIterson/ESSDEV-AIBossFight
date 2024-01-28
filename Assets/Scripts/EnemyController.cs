@@ -39,7 +39,7 @@ public class EnemyController : UnitController
         // The size of the array corresponds to NeatSupervisor.NetworkOutputCount
 
         enemyMovement.SetXMovementDirection((float)outputSignalArray[0]);
-
+        enemyMovement.Jump(outputSignalArray[1]); 
        
         //someMoveSpeed = outputSignalArray[1];
         //...

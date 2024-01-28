@@ -69,17 +69,19 @@ public class EnemyMovement : MonoBehaviour
         //     transform.Translate(new Vector3(-1 * speed * Time.deltaTime, 0, 0));
         // }
 
-        // if (yMovement > 0)
-        // {
-        //     yMovement -= riseDecceleration * Time.deltaTime * 500;
-        // }
+        if (yMovement > 0)
+        {
+            yMovement -= riseDecceleration * Time.deltaTime * 500;
+        }
 
         // if (player.transform.position.y > transform.position.y && rb.IsTouchingLayers(LayerMask.GetMask("Ground")) && !(player.transform.position.x > transform.position.x + 4 || player.transform.position.x < transform.position.x - 4))
         // {
         //     yMovement = jumpPower;
         // }
 
-        // //attackTimeCounter += Time.deltaTime;
+
+        attackTimeCounter += Time.deltaTime;
+
         Move(movementInputX);
     }
 
@@ -116,4 +118,12 @@ public class EnemyMovement : MonoBehaviour
     public void SetXMovementDirection(double input){
         movementInputX=(float)input;
     } 
+
+    public void Jump(double input){
+         if (rb.IsTouchingLayers(LayerMask.GetMask("Ground")) && input>0)
+        {
+            yMovement = jumpPower;
+        }
+    }
+
 }
