@@ -23,7 +23,7 @@ public class EnemyMovement : MonoBehaviour
     private Rigidbody2D rb;
     private Vector2 movementDirection;
     private RaycastHit2D[] hits;
-
+    public float movementInputX=0;
 
     // Start is called before the first frame update
     void Start()
@@ -42,7 +42,6 @@ public class EnemyMovement : MonoBehaviour
        // Vector3 targetPosition = new Vector3(target.position.x, transform.position.y, transform.position.z);
         transform.LookAt(targetPosition);
         transform.Rotate(new Vector3(0, -90, 0), Space.Self);//correcting the original rotation
-
 
         // //movement
 
@@ -81,7 +80,7 @@ public class EnemyMovement : MonoBehaviour
         // }
 
         // //attackTimeCounter += Time.deltaTime;
-        Move(movementDirection.x);
+        Move(movementInputX);
     }
 
     void FixedUpdate()
@@ -113,7 +112,8 @@ public class EnemyMovement : MonoBehaviour
     {
         transform.Translate(new Vector3((float)(speed*movementDirection) * Time.deltaTime, 0, 0));    
     }
-    public double getXMovementDirection(){
-        return movementDirection.x;
+    
+    public void SetXMovementDirection(double input){
+        movementInputX=(float)input;
     } 
 }

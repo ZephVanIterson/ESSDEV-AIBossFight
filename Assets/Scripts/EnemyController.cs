@@ -11,9 +11,9 @@ using UnitySharpNEAT;
 public class EnemyController : UnitController
 {
     
-    public EnemyMovement enemyMovement;
+    private EnemyMovement enemyMovement;
     void Start(){
-        //enemyMovement=transform.GetComponent<EnemyMovement>(); 
+        enemyMovement=transform.GetComponent<EnemyMovement>(); 
     }
    
     
@@ -38,7 +38,6 @@ public class EnemyController : UnitController
         // Read the outputs and do something with them
         // The size of the array corresponds to NeatSupervisor.NetworkOutputCount
 
-        print(enemyMovement);
         enemyMovement.SetXMovementDirection((float)outputSignalArray[0]);
 
        
