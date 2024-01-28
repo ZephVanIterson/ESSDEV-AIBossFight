@@ -2,6 +2,7 @@ using SharpNeat.Network;
 using SharpNeat.Phenomes;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnitySharpNEAT;
 
@@ -16,7 +17,7 @@ using UnitySharpNEAT;
 public class EnemyController : UnitController
 
 {
-
+    private EnemyMovement enemyMovement;
     GameObject player;
     float playerX = 0;
     float x = 0;
@@ -24,7 +25,8 @@ public class EnemyController : UnitController
 
     private void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Attackable");
+        player = GameObject.FindGameObjectWithTag("Player");
+        enemyMovement=transform.GetComponent<EnemyMovement>();
     }
 
     protected override void UpdateBlackBoxInputs(ISignalArray inputSignalArray)
@@ -60,9 +62,9 @@ public class EnemyController : UnitController
         // Read the outputs and do something with them
         // The size of the array corresponds to NeatSupervisor.NetworkOutputCount
 
-
-        /* EXAMPLE */
-        //someMoveDirection = outputSignalArray[0];
+        enemyMovement.SetXMovementDirection((float)outputSignalArray[0]);
+        enemyMovement.Jump(outputSignalArray[1]); 
+       
         //someMoveSpeed = outputSignalArray[1];
         //...
     }

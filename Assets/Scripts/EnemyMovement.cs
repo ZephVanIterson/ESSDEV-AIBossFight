@@ -23,8 +23,8 @@ public class EnemyMovement : MonoBehaviour
     private Rigidbody2D rb;
     private Vector2 movementDirection;
     private RaycastHit2D[] hits;
+    public float movementInputX=0;
 
-    
     // Start is called before the first frame update
     void Start()
     {
@@ -37,50 +37,52 @@ public class EnemyMovement : MonoBehaviour
     /// </summary>
     void Update()
     {
-        //rotate to look at the player (left or right)
-        //Vector2 targetPosition = new Vector3(target.position.x, transform.position.y);
-        Vector3 targetPosition = new Vector3(target.position.x, transform.position.y, transform.position.z);
-        transform.LookAt(targetPosition);
-        transform.Rotate(new Vector3(0, -90, 0), Space.Self);//correcting the original rotation
+    //     // rotate to look at the player (left or right)
+    //     Vector2 targetPosition = new Vector3(target.position.x, transform.position.y);
+    //    // Vector3 targetPosition = new Vector3(target.position.x, transform.position.y, transform.position.z);
+    //     transform.LookAt(targetPosition);
+    //     transform.Rotate(new Vector3(0, -90, 0), Space.Self);//correcting the original rotation
 
+        // //movement
 
-        //movement
+        // //If enemy is outside of attack range
+        // if (Vector3.Distance(transform.position, target.position) > attackRange)
+        // {
+        //     //Move towards player
+        //     transform.Translate(new Vector3(speed * Time.deltaTime, 0, 0));
+        // }
+        // //If enemy is in attack range, but outside of the minimum distance
+        // else if (Vector3.Distance(transform.position, target.position) > minDistance)
+        // {
+        //     ////Try to attack
+        //     if (Time.time - attackTimeCounter >= timeBetweenAttacks) 
+        //     {
+        //        Debug.Log("Attack");
+        //        attack();
+        //     }
 
-        //If enemy is outside of attack range
-        if (Vector3.Distance(transform.position, target.position) > attackRange)
-        {
-            //Move towards player
-            transform.Translate(new Vector3(speed * Time.deltaTime, 0, 0));
-        }
-        //If enemy is in attack range, but outside of the minimum distance
-        else if (Vector3.Distance(transform.position, target.position) > minDistance)
-        {
-            ////Try to attack
-            if (Time.time - attackTimeCounter >= timeBetweenAttacks) 
-            {
-               Debug.Log("Attack");
-               attack();
-            }
-
-        }
-        //If enemy is too close (inside minimum distance)
-        else
-        {
-            //move away
-            transform.Translate(new Vector3(-1 * speed * Time.deltaTime, 0, 0));
-        }
+        // }
+        // //If enemy is too close (inside minimum distance)
+        // else
+        // {
+        //     //move away
+        //     transform.Translate(new Vector3(-1 * speed * Time.deltaTime, 0, 0));
+        // }
 
         if (yMovement > 0)
         {
             yMovement -= riseDecceleration * Time.deltaTime * 500;
         }
 
-        if (player.transform.position.y > transform.position.y && rb.IsTouchingLayers(LayerMask.GetMask("Ground")) && !(player.transform.position.x > transform.position.x + 4 || player.transform.position.x < transform.position.x - 4))
-        {
-            yMovement = jumpPower;
-        }
+        // if (player.transform.position.y > transform.position.y && rb.IsTouchingLayers(LayerMask.GetMask("Ground")) && !(player.transform.position.x > transform.position.x + 4 || player.transform.position.x < transform.position.x - 4))
+        // {
+        //     yMovement = jumpPower;
+        // }
 
-        //attackTimeCounter += Time.deltaTime;
+
+        attackTimeCounter += Time.deltaTime;
+
+        Move(movementInputX);
     }
 
     void FixedUpdate()
@@ -88,12 +90,12 @@ public class EnemyMovement : MonoBehaviour
         rb.velocity = new Vector2(xDirection * speed, yMovement);
     }
 
-    private void attack() 
+    private void attack()
     {
         hits = Physics2D.CircleCastAll(attackTransform.position, attackRange + 50, transform.right, 0f, attackableLayer);
 
         Debug.Log(hits.Length);
-        for (int i = 0; i < hits.Length; i++) 
+        for (int i = 0; i < hits.Length; i++)
         {
             hits[i].collider.gameObject.GetComponent<EntityHealth>().Damage(attackDamage);
         }
@@ -101,7 +103,28 @@ public class EnemyMovement : MonoBehaviour
         attackTimeCounter = Time.time;
     }
 
-    private void OnDrawGizmosSelected() {
+
+    private void OnDrawGizmosSelected()
+    {
         Gizmos.DrawWireSphere(attackTransform.position, attackRange);
     }
+
+    
+    private void Move(double movementDirection)
+    {
+        //print(movementDirection);
+        transform.Translate(new Vector3((float)(speed*movementDirection) * Time.deltaTime, 0, 0));    
+    }
+    
+    public void SetXMovementDirection(double input){
+        movementInputX=(float)input;
+    } 
+
+    public void Jump(double input){
+         if (rb.IsTouchingLayers(LayerMask.GetMask("Ground")) && input>0)
+        {
+            yMovement = jumpPower;
+        }
+    }
+
 }
