@@ -25,7 +25,7 @@ public class EnemyController : UnitController
 
     private void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Attackable");
+        player = GameObject.FindGameObjectWithTag("Player");
         enemyMovement=transform.GetComponent<EnemyMovement>();
     }
 
