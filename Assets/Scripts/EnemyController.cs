@@ -1,6 +1,7 @@
 using SharpNeat.Phenomes;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnitySharpNEAT;
 
@@ -9,6 +10,13 @@ using UnitySharpNEAT;
 /// </summary>
 public class EnemyController : UnitController
 {
+    
+    public EnemyMovement enemyMovement;
+    void Start(){
+        //enemyMovement=transform.GetComponent<EnemyMovement>(); 
+    }
+   
+    
     protected override void UpdateBlackBoxInputs(ISignalArray inputSignalArray)
     {
         // Called by the base class on FixedUpdate
@@ -30,9 +38,10 @@ public class EnemyController : UnitController
         // Read the outputs and do something with them
         // The size of the array corresponds to NeatSupervisor.NetworkOutputCount
 
+        print(enemyMovement);
+        enemyMovement.SetXMovementDirection((float)outputSignalArray[0]);
 
-        /* EXAMPLE */
-        //someMoveDirection = outputSignalArray[0];
+       
         //someMoveSpeed = outputSignalArray[1];
         //...
     }

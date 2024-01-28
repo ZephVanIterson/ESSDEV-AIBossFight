@@ -4705,7 +4705,7 @@ GameObject:
   - component: {fileID: 1151458419}
   - component: {fileID: 1151458420}
   - component: {fileID: 1151458421}
-  m_Layer: 8
+  m_Layer: 3
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -4788,7 +4788,7 @@ Transform:
   m_GameObject: {fileID: 1151458410}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.28, y: -1.38, z: 0.037315246}
+  m_LocalPosition: {x: -7.87, y: -1.38, z: 0.037315246}
   m_LocalScale: {x: 8, y: 8, z: 8}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5018,6 +5018,7 @@ GameObject:
   - component: {fileID: 1425162245}
   - component: {fileID: 1425162247}
   - component: {fileID: 1425162248}
+  - component: {fileID: 1425162249}
   m_Layer: 6
   m_Name: Enemy
   m_TagString: Enemy
@@ -5034,7 +5035,7 @@ Transform:
   m_GameObject: {fileID: 1425162241}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.11, y: -0.55, z: 0.037315246}
+  m_LocalPosition: {x: 6.43, y: -0.71, z: 0.037315246}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5218,6 +5219,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackKey: 100
   enemyHealth: {fileID: 1151458418}
+--- !u!114 &1425162249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1425162241}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac03cd2d7cd1b8d49bc292d6fefcf742, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1462517076
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5836,7 +5849,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1955421707}
-  m_Layer: 8
+  m_Layer: 3
   m_Name: AttackTransform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
