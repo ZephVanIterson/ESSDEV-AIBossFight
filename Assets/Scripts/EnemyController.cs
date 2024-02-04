@@ -61,9 +61,11 @@ public class EnemyController : UnitController
 
         // Read the outputs and do something with them
         // The size of the array corresponds to NeatSupervisor.NetworkOutputCount
-
+    
         enemyMovement.SetXMovementDirection((float)outputSignalArray[0]);
-        enemyMovement.Jump(outputSignalArray[1]); 
+        print((float)outputSignalArray[0]);
+        //enemyMovement.Jump(outputSignalArray[1]); 
+
        
         //someMoveSpeed = outputSignalArray[1];
         //...
@@ -83,9 +85,12 @@ public class EnemyController : UnitController
         playerX = player.transform.position.x;
         x = transform.position.x;
 
-        if (Mathf.Abs(x - playerX) < rewardDist) {
-            return 1;
-        } 
+        // if (Mathf.Abs(x - playerX) < rewardDist) {
+        //     return 1;
+        // } 
+        if (20-Mathf.Abs(x - playerX)>0){
+            return 20-Mathf.Abs(x - playerX);
+        }
 
         return 0;
     }

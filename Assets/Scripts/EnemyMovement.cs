@@ -28,6 +28,7 @@ public class EnemyMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -112,8 +113,17 @@ public class EnemyMovement : MonoBehaviour
     
     private void Move(double movementDirection)
     {
-        //print(movementDirection);
-        transform.Translate(new Vector3((float)(speed*movementDirection) * Time.deltaTime, 0, 0));    
+        float direction; 
+        if (movementDirection<0.5){
+            direction=-1;
+        }
+        else if (movementDirection>0.5){
+            direction=1;
+        }
+        else{
+            direction=0; 
+        }
+        transform.Translate(new Vector3((float)(speed*direction) * Time.deltaTime, 0, 0));    
     }
     
     public void SetXMovementDirection(double input){
