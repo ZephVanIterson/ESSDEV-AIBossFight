@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _experimentConfigFileName: CarExperiment.config
-  _networkInputCount: 5
+  _networkInputCount: 2
   _networkOutputCount: 2
   Trials: 2
   TrialDuration: 12

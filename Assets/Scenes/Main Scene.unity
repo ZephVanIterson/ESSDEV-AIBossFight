@@ -5250,6 +5250,7 @@ MonoBehaviour:
   timeBetweenAttacks: 1
   attackDamage: 10
   movementInputX: 0
+  hitTally: 0
 --- !u!50 &1425162246
 Rigidbody2D:
   serializedVersion: 4
@@ -5623,6 +5624,14 @@ PrefabInstance:
     - target: {fileID: 7960091787313936975, guid: 87ccd12944f174c4e80dd8a6d81d7c3c, type: 3}
       propertyPath: StoppingFitness
       value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7960091787313936975, guid: 87ccd12944f174c4e80dd8a6d81d7c3c, type: 3}
+      propertyPath: _networkInputCount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7960091787313936975, guid: 87ccd12944f174c4e80dd8a6d81d7c3c, type: 3}
+      propertyPath: _networkOutputCount
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7960091787313936976, guid: 87ccd12944f174c4e80dd8a6d81d7c3c, type: 3}
       propertyPath: m_Name

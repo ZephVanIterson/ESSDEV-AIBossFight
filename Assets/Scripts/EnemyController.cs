@@ -46,7 +46,7 @@ public class EnemyController : UnitController
         playerX = player.transform.position.x;
         x = transform.position.x;
         inputSignalArray[0] = playerX;
-        inputSignalArray[1] = playerX;
+        inputSignalArray[1] = transform.position.x;
 
 
         /* EXAMPLE */
@@ -63,7 +63,9 @@ public class EnemyController : UnitController
         // The size of the array corresponds to NeatSupervisor.NetworkOutputCount
     
         enemyMovement.SetXMovementDirection((float)outputSignalArray[0]);
-        print((float)outputSignalArray[0]);
+        enemyMovement.attack((float)outputSignalArray[1]);
+
+        // print((float)outputSignalArray[0]);
         //enemyMovement.Jump(outputSignalArray[1]); 
 
        
@@ -73,6 +75,7 @@ public class EnemyController : UnitController
 
     public override float GetFitness()
     {
+        float fitness=0;
         // Called during the evaluation phase (at the end of each trail)
 
         // The performance of this unit, i.e. it's fitness, is retrieved by this function.
@@ -88,11 +91,12 @@ public class EnemyController : UnitController
         // if (Mathf.Abs(x - playerX) < rewardDist) {
         //     return 1;
         // } 
-        if (20-Mathf.Abs(x - playerX)>0){
-            return 20-Mathf.Abs(x - playerX);
+        if (10-Mathf.Abs(x - playerX)>0){
+            fitness+= 10-Mathf.Abs(x - playerX);
         }
+        fitness+=enemyMovement.hitTally;
 
-        return 0;
+        return fitness;
     }
 
     protected override void HandleIsActiveChanged(bool newIsActive)
