@@ -63,7 +63,7 @@ public class EnemyController : UnitController
         // The size of the array corresponds to NeatSupervisor.NetworkOutputCount
     
         enemyMovement.SetXMovementDirection((float)outputSignalArray[0]);
-        enemyMovement.attack((float)outputSignalArray[1]);
+        //enemyMovement.attack((float)outputSignalArray[1]);
 
         // print((float)outputSignalArray[0]);
         //enemyMovement.Jump(outputSignalArray[1]); 
@@ -94,7 +94,7 @@ public class EnemyController : UnitController
         if (10-Mathf.Abs(x - playerX)>0){
             fitness+= 10-Mathf.Abs(x - playerX);
         }
-        fitness+=enemyMovement.hitTally;
+        //fitness+=enemyMovement.hitTally;
 
         return fitness;
     }

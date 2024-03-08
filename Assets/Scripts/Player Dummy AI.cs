@@ -40,12 +40,12 @@ public class PlayerDummyAI : MonoBehaviour
                 attack = true;
                 decisionTime = 2;
                 break;
-            case 4:
+            case 3:
                 randomMovement = true;
                 smartAttack = true;
                 decisionTime = 2;
                 break;
-            case 5:
+            case 4:
                 smartMovement = true;
                 smartAttack = true;
                 decisionTime = 2;
