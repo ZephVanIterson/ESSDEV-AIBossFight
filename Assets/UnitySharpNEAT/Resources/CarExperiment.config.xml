@@ -2,7 +2,7 @@
 
     <Config>
       <ExperimentName>CarExperiment</ExperimentName>
-      <PopulationSize>50</PopulationSize>
+      <PopulationSize>10</PopulationSize>
       <SpecieCount>10</SpecieCount>
       <Activation>
         <Scheme>Acyclic</Scheme>

@@ -24,10 +24,12 @@ public class EnemyMovement : MonoBehaviour
     private Vector2 movementDirection;
     private RaycastHit2D[] hits;
     public float movementInputX=0;
+    public float hitTally=0;
 
     // Start is called before the first frame update
     void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -80,7 +82,7 @@ public class EnemyMovement : MonoBehaviour
         // }
 
 
-        attackTimeCounter += Time.deltaTime;
+        //attackTimeCounter += Time.deltaTime;
 
         Move(movementInputX);
     }
@@ -90,17 +92,30 @@ public class EnemyMovement : MonoBehaviour
         rb.velocity = new Vector2(xDirection * speed, yMovement);
     }
 
-    private void attack()
+    public void attack(double inputValue)
     {
+        
+        if (Time.time-attackTimeCounter>3){
+        print("attack counter: "+attackTimeCounter+" Time: "+ Time.time);
+        attackTimeCounter = Time.time;
+        //print("Attack");
+        if (inputValue>0.5){
         hits = Physics2D.CircleCastAll(attackTransform.position, attackRange + 50, transform.right, 0f, attackableLayer);
 
         Debug.Log(hits.Length);
+        
         for (int i = 0; i < hits.Length; i++)
         {
+            hitTally+=4;
             hits[i].collider.gameObject.GetComponent<EntityHealth>().Damage(attackDamage);
         }
+        if (hits.Length==0){
+            hitTally--;
+        }
 
-        attackTimeCounter = Time.time;
+        }
+        }
+        
     }
 
 
@@ -112,8 +127,18 @@ public class EnemyMovement : MonoBehaviour
     
     private void Move(double movementDirection)
     {
-        //print(movementDirection);
-        transform.Translate(new Vector3((float)(speed*movementDirection) * Time.deltaTime, 0, 0));    
+        float direction; 
+        if (movementDirection<0.3){
+            direction=-1;
+        }
+        else if (movementDirection>0.7){
+            direction=1;
+        }
+        else{
+            direction=0; 
+        }
+        transform.Translate(new Vector3((float)(speed*direction) * Time.deltaTime, 0, 0));    
+
     }
     
     public void SetXMovementDirection(double input){
