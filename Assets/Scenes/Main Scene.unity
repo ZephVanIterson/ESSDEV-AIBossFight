@@ -4992,7 +4992,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb7f587ffdb36ca4b911559c5f41d695, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Smartness: 3
+  Smartness: 0
 --- !u!114 &1151458421
 MonoBehaviour:
   m_ObjectHideFlags: 0
