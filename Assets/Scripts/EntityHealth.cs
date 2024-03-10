@@ -11,6 +11,11 @@ public class EntityHealth : MonoBehaviour
         health = maxHealth;
         // Debug.Log("Health: " + health);
     }
+
+
+    public float getHealth() {
+        return health;
+    }
     
     public void Damage(float amount) {
         health -= amount;
