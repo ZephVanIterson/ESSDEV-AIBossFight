@@ -100,13 +100,13 @@ public class EnemyMovement : MonoBehaviour
         attackTimeCounter = Time.time;
         if (inputValue>0.5){
         print("Attack");    
-        hits = Physics2D.CircleCastAll(attackTransform.position, attackRange + 50, transform.right, 0f, attackableLayer);
+        hits = Physics2D.CircleCastAll(attackTransform.position, attackRange, transform.right, 0f, attackableLayer);
 
         Debug.Log(hits.Length);
         
         for (int i = 0; i < hits.Length; i++)
         {
-            hitTally+=4;
+            hitTally+=1;
             hits[i].collider.gameObject.GetComponent<EntityHealth>().Damage(attackDamage);
         }
         
