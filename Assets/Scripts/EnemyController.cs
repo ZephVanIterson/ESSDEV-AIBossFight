@@ -91,9 +91,9 @@ public class EnemyController : UnitController
         // if (Mathf.Abs(x - playerX) < rewardDist) {
         //     return 1;
         // } 
-        if (10-Mathf.Abs(x - playerX)>0){
-            fitness+= 10-Mathf.Abs(x - playerX);
-        }
+        // if (10-Mathf.Abs(x - playerX)>0){
+        //     fitness+= 10-Mathf.Abs(x - playerX);
+        // }
 
         fitness+=enemyMovement.hitTally;
 
