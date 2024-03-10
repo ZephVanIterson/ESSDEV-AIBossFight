@@ -85,8 +85,8 @@ public class EnemyController : UnitController
         //For now:
         //Get player location, oif close enoiugh to player, get points
 
-        playerX = player.transform.position.x;
-        x = transform.position.x;
+/*        playerX = player.transform.position.x;
+        x = transform.position.x;*/
 
         // if (Mathf.Abs(x - playerX) < rewardDist) {
         //     return 1;
@@ -95,7 +95,17 @@ public class EnemyController : UnitController
         //     fitness+= 10-Mathf.Abs(x - playerX);
         // }
 
-        fitness+=enemyMovement.hitTally;
+        float playerHealth = player.GetComponent<EntityHealth>().getHealth();
+        float enemyHealth = this.GetComponent<EntityHealth>().getHealth();
+
+        float maxPlayerHealth = player.GetComponent<EntityHealth>().maxHealth;
+        float maxEnemyHealth = this.GetComponent<EntityHealth>().maxHealth;
+
+        float playerDamageTaken = maxPlayerHealth - playerHealth;
+        float enemyDamageTaken = maxEnemyHealth - enemyHealth;
+
+
+        fitness = playerDamageTaken - enemyDamageTaken;
 
         return fitness;
     }
