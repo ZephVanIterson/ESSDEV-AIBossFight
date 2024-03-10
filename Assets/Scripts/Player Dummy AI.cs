@@ -23,8 +23,10 @@ public class PlayerDummyAI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+       
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
         playerMovement = transform.GetComponent<PlayerMovement>();
+    
         rnd = Random.Range(0, 100);
         switch (Smartness)
         {
@@ -58,6 +60,11 @@ public class PlayerDummyAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        playerMovement = transform.GetComponent<PlayerMovement>();
+        if (enemies.Length<1){
+            return;
+        }
         time += Time.deltaTime;
         if (time >= decisionTime)
         {
