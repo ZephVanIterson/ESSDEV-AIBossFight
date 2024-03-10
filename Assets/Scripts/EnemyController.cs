@@ -105,7 +105,7 @@ public class EnemyController : UnitController
         float enemyDamageTaken = maxEnemyHealth - enemyHealth;
 
 
-        fitness = playerDamageTaken - enemyDamageTaken;
+        fitness += playerDamageTaken - enemyDamageTaken;
 
         return fitness;
     }
@@ -122,6 +122,8 @@ public class EnemyController : UnitController
 
                 // reset members
                 enemyMovement.hitTally=0;
+                player.GetComponent<EntityHealth>().maxHealth=7000;
+                this.GetComponent<EntityHealth>().maxHealth=100;
             }
 
             // hide/show children 
