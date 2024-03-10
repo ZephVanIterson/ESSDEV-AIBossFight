@@ -94,6 +94,7 @@ public class EnemyController : UnitController
         if (10-Mathf.Abs(x - playerX)>0){
             fitness+= 10-Mathf.Abs(x - playerX);
         }
+
         fitness+=enemyMovement.hitTally;
 
         return fitness;
