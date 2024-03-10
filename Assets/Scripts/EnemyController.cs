@@ -103,7 +103,23 @@ public class EnemyController : UnitController
     protected override void HandleIsActiveChanged(bool newIsActive)
     {
         // Called whenever the value of IsActive has changed
+        if (newIsActive == false)
+            {
+                // the unit has been deactivated, IsActive was switched to false
 
+                // reset transform
+                transform.position=new Vector3(0, 0, 0);
+
+                // reset members
+                enemyMovement.hitTally=0;
+            }
+
+            // hide/show children 
+            // the children happen to be the car meshes => we hide this Unit when IsActive turns false and show it when it turns true
+            foreach (Transform t in transform)
+            {
+                t.gameObject.SetActive(newIsActive);
+            }
         // Since NeatSupervisor.cs is making use of Object Pooling, this Unit will never get destroyed. 
         // Make sure that when IsActive gets set to false, the variables and the Transform of this Unit are reset!
         // Consider to also disable MeshRenderers until IsActive turns true again.
