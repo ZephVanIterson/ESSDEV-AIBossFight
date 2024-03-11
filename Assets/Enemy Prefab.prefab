@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 6436427848403531960}
   - component: {fileID: 7018240092736291263}
   - component: {fileID: 6778553262389744777}
+  - component: {fileID: 687145378283468534}
   m_Layer: 6
   m_Name: Enemy Prefab
   m_TagString: Enemy
@@ -79,7 +80,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1201846247
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: -7385789195546760866, guid: 0e3502a80399d164ea01f1868f65acbf, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -180,15 +181,17 @@ MonoBehaviour:
   jumpPower: 22
   riseDecceleration: 0.1
   minDistance: 2
-  attackRange: 3
+  attackRange: 2
   player: {fileID: 0}
   target: {fileID: 0}
   attackTransform: {fileID: 894199395141603707}
   attackableLayer:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 8
   timeBetweenAttacks: 1
   attackDamage: 10
+  movementInputX: 0
+  hitTally: 0
 --- !u!114 &2091737785626017152
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -250,6 +253,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac03cd2d7cd1b8d49bc292d6fefcf742, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rewardDist: 2
+--- !u!95 &687145378283468534
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1385927132702865252}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 877c237dd65387b4c82ba0ef0a1296e6, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &7843436681106617927
 GameObject:
   m_ObjectHideFlags: 0
