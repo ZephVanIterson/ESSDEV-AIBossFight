@@ -25,12 +25,14 @@ public class EnemyMovement : MonoBehaviour
     private RaycastHit2D[] hits;
     public float movementInputX=0;
     public float hitTally=0;
+    private Animator animator;
 
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -112,6 +114,7 @@ public class EnemyMovement : MonoBehaviour
         
 
         }
+        animator.SetTrigger("Attack");
         }
         
     }

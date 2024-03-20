@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 8458915377062418332}
   - component: {fileID: 5218334967719838852}
   - component: {fileID: 41901492403135318}
+  - component: {fileID: 2882755348637205269}
   m_Layer: 6
   m_Name: Enemy Prefab 1
   m_TagString: Enemy
@@ -231,6 +232,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rewardDist: 2
+--- !u!95 &2882755348637205269
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6669402605611291257}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 877c237dd65387b4c82ba0ef0a1296e6, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &6937318418882327088
 GameObject:
   m_ObjectHideFlags: 0
