@@ -22,11 +22,13 @@ public class EnemyController : UnitController
     float playerX = 0;
     float x = 0;
     public float rewardDist = 2;
+    private float lastHealth;
 
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         enemyMovement=transform.GetComponent<EnemyMovement>();
+        lastHealth=player.GetComponent<EntityHealth>().getHealth();
     }
 
     protected override void UpdateBlackBoxInputs(ISignalArray inputSignalArray)
@@ -101,11 +103,11 @@ public class EnemyController : UnitController
         float maxPlayerHealth = player.GetComponent<EntityHealth>().maxHealth;
         float maxEnemyHealth = this.GetComponent<EntityHealth>().maxHealth;
 
-        float playerDamageTaken = maxPlayerHealth - playerHealth;
+        float playerDamageTaken = lastHealth - playerHealth;
         float enemyDamageTaken = maxEnemyHealth - enemyHealth;
 
-
-        fitness = playerDamageTaken - enemyDamageTaken;
+        lastHealth=playerHealth; 
+        fitness += playerDamageTaken - enemyDamageTaken;
 
         return fitness;
     }
@@ -122,6 +124,8 @@ public class EnemyController : UnitController
 
                 // reset members
                 enemyMovement.hitTally=0;
+                player.GetComponent<EntityHealth>().maxHealth=7000;
+                this.GetComponent<EntityHealth>().maxHealth=100;
             }
 
             // hide/show children 

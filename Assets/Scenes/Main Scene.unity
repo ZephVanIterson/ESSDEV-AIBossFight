@@ -748,7 +748,7 @@ GameObject:
   - component: {fileID: 688497027}
   - component: {fileID: 688497026}
   - component: {fileID: 688497025}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4736,8 +4736,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 9
-  jumpPower: 23
-  riseDecceleration: 0.1
+  jumpPower: 45
+  riseDecceleration: 0.3
 --- !u!212 &1151458414
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4913,7 +4913,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1151458410}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cb7f587ffdb36ca4b911559c5f41d695, type: 3}
   m_Name: 
@@ -5542,12 +5542,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7960091787313936975, guid: 87ccd12944f174c4e80dd8a6d81d7c3c, type: 3}
+      propertyPath: Trials
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7960091787313936975, guid: 87ccd12944f174c4e80dd8a6d81d7c3c, type: 3}
       propertyPath: _spawnParent
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7960091787313936975, guid: 87ccd12944f174c4e80dd8a6d81d7c3c, type: 3}
       propertyPath: TrialDuration
-      value: 4
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7960091787313936975, guid: 87ccd12944f174c4e80dd8a6d81d7c3c, type: 3}
       propertyPath: StoppingFitness
@@ -5565,6 +5569,10 @@ PrefabInstance:
       propertyPath: _unitControllerPrefab
       value: 
       objectReference: {fileID: 41901492403135318, guid: 28262db887eea3244a615cfe3cb10b7a, type: 3}
+    - target: {fileID: 7960091787313936975, guid: 87ccd12944f174c4e80dd8a6d81d7c3c, type: 3}
+      propertyPath: _experimentConfigFileName
+      value: OurExperiment.config
+      objectReference: {fileID: 0}
     - target: {fileID: 7960091787313936976, guid: 87ccd12944f174c4e80dd8a6d81d7c3c, type: 3}
       propertyPath: m_Name
       value: Neat Supervisor
