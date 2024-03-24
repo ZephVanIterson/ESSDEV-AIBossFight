@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 using static UnityEditor.FilePathAttribute;
 
@@ -29,6 +30,9 @@ public class PlayerAttack : MonoBehaviour
         Camera cam = Camera.main;
         mapHeight = 2f * cam.orthographicSize;
         mapWidth = mapHeight * cam.aspect;
+
+        Debug.Log(mapHeight);
+        Debug.Log(mapWidth);    
 
         sizeVector = new Vector2(mapWidth / 3, mapHeight);
 
@@ -64,11 +68,16 @@ public class PlayerAttack : MonoBehaviour
     private void attack(int location)
     {
 
-        locationVector = new Vector2((mapWidth / 6) * (1 + (2 * location)), mapHeight / 2);
+        locationVector = new Vector2((mapWidth / 6) * ((2 * location)-1), mapHeight / 2);
+
+        Debug.Log(locationVector);
+        Debug.Log(sizeVector);
 
 
         //Get a rectangle cast
         hits = Physics2D.BoxCastAll(locationVector, sizeVector, 0f, Vector2.down, .1f, enemyLayer);
+
+        
 
 
         Debug.Log(hits.Length);
