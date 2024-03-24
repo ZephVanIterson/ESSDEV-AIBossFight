@@ -34,7 +34,7 @@ public class PlayerAttack : MonoBehaviour
         Debug.Log(mapHeight);
         Debug.Log(mapWidth);    
 
-        sizeVector = new Vector2(mapWidth / 3, mapHeight);
+        sizeVector = new Vector2(mapWidth / 6, mapHeight/2);
 
     }
 
