@@ -2,8 +2,8 @@
 
     <Config>
       <ExperimentName>Experiment</ExperimentName>
-      <PopulationSize>50</PopulationSize>
-      <SpecieCount>10</SpecieCount>
+      <PopulationSize>4</PopulationSize>
+      <SpecieCount>4</SpecieCount>
       <Activation>
         <Scheme>Acyclic</Scheme>
       </Activation>
