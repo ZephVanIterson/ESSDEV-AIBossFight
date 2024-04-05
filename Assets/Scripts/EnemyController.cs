@@ -23,7 +23,7 @@ public class EnemyController : UnitController
     float x = 0;
     public float rewardDist = 2;
     private float lastHealth;
-
+    float playerAttack=0; 
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -46,9 +46,12 @@ public class EnemyController : UnitController
 
 
         playerX = player.transform.position.x;
+        playerAttack = player.GetComponent<PlayerAttack>().attackArea; 
         x = transform.position.x;
+        //print("ATTACK DIR: " + playerAttack);
         inputSignalArray[0] = playerX;
         inputSignalArray[1] = transform.position.x;
+        inputSignalArray[2] = playerAttack; //(0 for no attack 1,2,3 for sections of map)
 
 
         /* EXAMPLE */
