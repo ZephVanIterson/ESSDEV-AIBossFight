@@ -15,6 +15,7 @@ public class PlayerAttack : MonoBehaviour
     public KeyCode attackKey;
     private float attackTimeCounter = 0;
     public float timeBetweenAttacks = 1;
+    public float attackArea=0;
 
     private float mapHeight = 0;
     private float mapWidth = 0;
@@ -51,6 +52,8 @@ public class PlayerAttack : MonoBehaviour
         {
             if (Time.time - attackTimeCounter >= timeBetweenAttacks)
             {
+                attackArea=1;
+                //print(attackArea);
                 attack(1);
             }
         }
@@ -58,6 +61,8 @@ public class PlayerAttack : MonoBehaviour
         {
             if (Time.time - attackTimeCounter >= timeBetweenAttacks)
             {
+                attackArea=2;
+                //print(attackArea);
                 attack(2);
             }
         }
@@ -65,8 +70,15 @@ public class PlayerAttack : MonoBehaviour
         {
             if (Time.time - attackTimeCounter >= timeBetweenAttacks)
             {
+                attackArea=3;
+                //print(attackArea);
                 attack(3);
             }
+        }
+        else{
+             if (Time.time - attackTimeCounter >= 3*timeBetweenAttacks){
+                attackArea=0;
+             }
         }
 
     }
