@@ -114,11 +114,14 @@ public class EnemyMovement : MonoBehaviour
         
 
         }
-        animator.SetTrigger("Attack");
+        attackAnimation();
         }
         
     }
 
+    public void attackAnimation() {
+        animator.SetTrigger("Attack");
+    }
 
     private void OnDrawGizmosSelected()
     {

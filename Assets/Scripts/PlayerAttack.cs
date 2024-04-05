@@ -9,6 +9,8 @@ public class PlayerAttack : MonoBehaviour
     public LayerMask attackableLayer;
     public LayerMask enemyLayer;
 
+    public AttackBar cooldownBar;
+
     public float attackDamage = 10;
     //public float attackRange = 1; //Greater than min_distance
 
@@ -43,6 +45,7 @@ public class PlayerAttack : MonoBehaviour
         sizeVector = new Vector2(mapWidth / 3, mapHeight);
         Debug.Log("sizeVector: " + sizeVector);
 
+        cooldownBar.setCooldownTime(timeBetweenAttacks);
     }
 
     // Update is called once per frame
@@ -50,7 +53,7 @@ public class PlayerAttack : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            if (Time.time - attackTimeCounter >= timeBetweenAttacks)
+            if (Time.time - cooldownBar.getLastAttackTime() >= timeBetweenAttacks)
             {
                 attackArea=1;
                 //print(attackArea);
@@ -59,7 +62,7 @@ public class PlayerAttack : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            if (Time.time - attackTimeCounter >= timeBetweenAttacks)
+            if (Time.time - cooldownBar.getLastAttackTime() >= timeBetweenAttacks)
             {
                 attackArea=2;
                 //print(attackArea);
@@ -68,7 +71,7 @@ public class PlayerAttack : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            if (Time.time - attackTimeCounter >= timeBetweenAttacks)
+            if (Time.time - cooldownBar.getLastAttackTime() >= timeBetweenAttacks)
             {
                 attackArea=3;
                 //print(attackArea);
@@ -76,7 +79,7 @@ public class PlayerAttack : MonoBehaviour
             }
         }
         else{
-             if (Time.time - attackTimeCounter >= 3*timeBetweenAttacks){
+             if (Time.time - cooldownBar.getLastAttackTime() >= 3*timeBetweenAttacks){
                 attackArea=0;
              }
         }
@@ -85,7 +88,8 @@ public class PlayerAttack : MonoBehaviour
 
 private void attack(int location)
     {
-        attackTimeCounter = Time.time;
+        
+        cooldownBar.setLastAttackTime(Time.time);
 
         //locationVector = new Vector2((mapWidth / 6) * (1 + (2 * location)), mapHeight / 2);
         locationVector = new Vector2((mapWidth / 6) * ((2 * location)-1) - mapWidth/2, 0);
