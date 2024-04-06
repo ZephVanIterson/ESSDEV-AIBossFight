@@ -9,7 +9,7 @@ public class EnemyMovement : MonoBehaviour
     public int jumpPower = 1;
     public float riseDecceleration = 0.5f;
     public float minDistance = 1;
-    public float attackRange = 2; //Greater than min_distance
+    public float attackRange = 5; //Greater than min_distance
     public GameObject player;
     public Transform target;
     public Transform attackTransform;
@@ -19,13 +19,14 @@ public class EnemyMovement : MonoBehaviour
     public float attackDamage = 10;
     private float attackTimeCounter = 0;
     private float yMovement = 0;
-    private int xDirection = 0;
+    private int xDirection = 0; 
     private Rigidbody2D rb;
     private Vector2 movementDirection;
     private RaycastHit2D[] hits;
     public float movementInputX=0;
     public float hitTally=0;
     private Animator animator;
+
 
     // Start is called before the first frame update
     void Start()
@@ -103,7 +104,6 @@ public class EnemyMovement : MonoBehaviour
         if (inputValue>0.5){
         //print("Attack");    
         hits = Physics2D.CircleCastAll(attackTransform.position, attackRange, transform.right, 0f, attackableLayer);
-
         //Debug.Log(hits.Length);
         
         for (int i = 0; i < hits.Length; i++)
@@ -131,9 +131,11 @@ public class EnemyMovement : MonoBehaviour
         float direction; 
         if (movementDirection<0.3){
             direction=-1;
+            transform.localRotation = Quaternion.Euler(0, 180, 0);
         }
         else if (movementDirection>0.7){
             direction=1;
+            transform.localRotation = Quaternion.Euler(0, 0, 0);
         }
         else{
             direction=0; 

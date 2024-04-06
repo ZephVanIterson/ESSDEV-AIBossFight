@@ -52,8 +52,6 @@ public class PlayerAttack : MonoBehaviour
         {
             if (Time.time - attackTimeCounter >= timeBetweenAttacks)
             {
-                attackArea=1;
-                //print(attackArea);
                 attack(1);
             }
         }
@@ -61,8 +59,6 @@ public class PlayerAttack : MonoBehaviour
         {
             if (Time.time - attackTimeCounter >= timeBetweenAttacks)
             {
-                attackArea=2;
-                //print(attackArea);
                 attack(2);
             }
         }
@@ -70,8 +66,6 @@ public class PlayerAttack : MonoBehaviour
         {
             if (Time.time - attackTimeCounter >= timeBetweenAttacks)
             {
-                attackArea=3;
-                //print(attackArea);
                 attack(3);
             }
         }
@@ -83,12 +77,14 @@ public class PlayerAttack : MonoBehaviour
 
     }
 
-private void attack(int location)
+public void attack(int location)
     {
+        if (Time.time - attackTimeCounter >= timeBetweenAttacks){
+        attackArea=location;
         attackTimeCounter = Time.time;
 
         //locationVector = new Vector2((mapWidth / 6) * (1 + (2 * location)), mapHeight / 2);
-        locationVector = new Vector2((mapWidth / 6) * ((2 * location)-1) - mapWidth/2, 0);
+         locationVector = new Vector2((mapWidth / 6) * ((2 * location)-1) - mapWidth/2, 0);
 
         Debug.Log("Location: " + locationVector);
 
@@ -170,5 +166,7 @@ IEnumerator delayedAttack()
 
     /*    private void OnDrawGizmosSelected() {
             //Gizmos.draww
+ 
         }*/
+    }
 }
