@@ -16,7 +16,7 @@ public class PlayerAttack : MonoBehaviour
 
     public KeyCode attackKey;
     private float attackTimeCounter = 0;
-    public float timeBetweenAttacks = 1;
+    public float timeBetweenAttacks = 5;
     public float attackArea=0;
 
     private float mapHeight = 0;
@@ -55,8 +55,6 @@ public class PlayerAttack : MonoBehaviour
         {
             if (Time.time - cooldownBar.getLastAttackTime() >= timeBetweenAttacks)
             {
-                attackArea=1;
-                //print(attackArea);
                 attack(1);
             }
         }
@@ -64,8 +62,6 @@ public class PlayerAttack : MonoBehaviour
         {
             if (Time.time - cooldownBar.getLastAttackTime() >= timeBetweenAttacks)
             {
-                attackArea=2;
-                //print(attackArea);
                 attack(2);
             }
         }
@@ -73,8 +69,6 @@ public class PlayerAttack : MonoBehaviour
         {
             if (Time.time - cooldownBar.getLastAttackTime() >= timeBetweenAttacks)
             {
-                attackArea=3;
-                //print(attackArea);
                 attack(3);
             }
         }
@@ -86,13 +80,17 @@ public class PlayerAttack : MonoBehaviour
 
     }
 
-private void attack(int location)
+public void attack(int location)
     {
-        
+
+        if (Time.time - attackTimeCounter >= timeBetweenAttacks){
+        attackArea=location;
+        attackTimeCounter = Time.time;
+
         cooldownBar.setLastAttackTime(Time.time);
 
         //locationVector = new Vector2((mapWidth / 6) * (1 + (2 * location)), mapHeight / 2);
-        locationVector = new Vector2((mapWidth / 6) * ((2 * location)-1) - mapWidth/2, 0);
+         locationVector = new Vector2((mapWidth / 6) * ((2 * location)-1) - mapWidth/2, 0);
 
         Debug.Log("Location: " + locationVector);
 
@@ -174,5 +172,7 @@ IEnumerator delayedAttack()
 
     /*    private void OnDrawGizmosSelected() {
             //Gizmos.draww
+ 
         }*/
+    }
 }

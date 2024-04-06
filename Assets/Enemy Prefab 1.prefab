@@ -176,7 +176,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c80a982a6a920cf40951f27aa62d108e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 4
+  speed: 7
   jumpPower: 22
   riseDecceleration: 0.1
   minDistance: 2
@@ -186,7 +186,7 @@ MonoBehaviour:
   attackTransform: {fileID: 1520735434801830132}
   attackableLayer:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 128
   timeBetweenAttacks: 1
   attackDamage: 10
   movementInputX: 0
@@ -204,7 +204,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bar: {fileID: 0}
-  maxHealth: 100
+  maxHealth: 100000
 --- !u!114 &5218334967719838852
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -218,7 +218,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackKey: 98
-  enemyHealth: {fileID: 0}
+  enemyHealth: {fileID: 8458915377062418332}
 --- !u!114 &41901492403135318
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -278,7 +278,7 @@ Transform:
   m_GameObject: {fileID: 6937318418882327088}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.416, y: -0.209, z: 2}
+  m_LocalPosition: {x: 0.6, y: -0.209, z: 2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

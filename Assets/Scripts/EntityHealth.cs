@@ -20,7 +20,7 @@ public class EntityHealth : MonoBehaviour
     public void Damage(float amount) {
         health -= amount;
         Debug.Log(gameObject.name+" Health: " + health + " (Took "+amount+" damage)");
-        bar.updateHealth(health/maxHealth);
+        //bar.updateHealth(health/maxHealth);
 
         if (health <= 0) {
             Debug.Log(gameObject.name + " died");

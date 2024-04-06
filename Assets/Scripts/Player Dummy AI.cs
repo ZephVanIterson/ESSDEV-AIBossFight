@@ -136,24 +136,8 @@ public class PlayerDummyAI : MonoBehaviour
 
     private void SmartAttack()
     {
-        GameObject closestEnemy = FindNearestEnemy();
-        float enemyPosition = closestEnemy.transform.position.x;
-        // print(enemies[0]);
-        // print(enemies[1]);
-
-
-        if (enemyPosition > transform.position.x && enemyPosition - transform.position.x < 3.5 && !attacking)
-        {
-            //attack right
-            //print("Attack right");
-            attacking=true;
-        }
-        else if (enemyPosition < transform.position.x && enemyPosition - transform.position.x > -3.5 &&!attacking)
-        {
-            //attack left
-            //print("Attack left");
-            attacking=true;
-        }
+       int rnd2 = Random.Range(1, 4);
+       transform.GetComponent<PlayerAttack>().attack(rnd2);
     }
 
     private void SmartMovement()
