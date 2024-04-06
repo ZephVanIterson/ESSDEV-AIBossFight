@@ -1,14 +1,12 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-
-
-public class AttackUI : MonoBehaviour
+public class AttackBar : MonoBehaviour
 {
     public Image image;
-    public KeyCode attackKey;
-    public float cooldownTime;
+    private float cooldownTime;
     private float lastAttackTime;
 
     // Start is called before the first frame update
@@ -21,13 +19,18 @@ public class AttackUI : MonoBehaviour
     void Update()
     {
         float timeBetweenAttacks = Time.time - lastAttackTime;
-        if(Input.GetKeyDown(attackKey) && timeBetweenAttacks >= cooldownTime ) {
-                image.fillAmount = 1;
-                
-                lastAttackTime = Time.time;
-            }
-            else if (timeBetweenAttacks <= cooldownTime ) {
-                image.fillAmount = timeBetweenAttacks / cooldownTime;
-            }
+
+        image.fillAmount = timeBetweenAttacks <= cooldownTime ? timeBetweenAttacks / cooldownTime : 1;
+    }
+
+    public void setCooldownTime(float timeBetweenAttacks) {
+        cooldownTime = timeBetweenAttacks;
+    }
+    public void setLastAttackTime(float time) {
+        lastAttackTime = time;
+    }
+
+    public float getLastAttackTime(){
+        return lastAttackTime;
     }
 }
