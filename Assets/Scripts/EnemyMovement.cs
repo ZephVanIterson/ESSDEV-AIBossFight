@@ -133,7 +133,7 @@ public class EnemyMovement : MonoBehaviour
     {
         float direction; 
         if (movementDirection<0.3){
-            direction=-1;
+            direction=1;
             transform.localRotation = Quaternion.Euler(0, 180, 0);
         }
         else if (movementDirection>0.7){

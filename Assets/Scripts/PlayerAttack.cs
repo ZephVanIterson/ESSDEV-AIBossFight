@@ -16,7 +16,7 @@ public class PlayerAttack : MonoBehaviour
 
     public KeyCode attackKey;
     private float attackTimeCounter = 0;
-    public float timeBetweenAttacks = 1;
+    public float timeBetweenAttacks = 5;
     public float attackArea=0;
 
     private float mapHeight = 0;

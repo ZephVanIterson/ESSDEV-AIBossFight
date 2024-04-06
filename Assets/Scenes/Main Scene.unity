@@ -5031,7 +5031,7 @@ MonoBehaviour:
   cooldownBar: {fileID: 427048943}
   attackDamage: 10
   attackKey: 106
-  timeBetweenAttacks: 0.5
+  timeBetweenAttacks: 5
   attackArea: 0
 --- !u!1 &1372728147
 GameObject:
